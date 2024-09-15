@@ -1,106 +1,70 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    let powerGenerated = 100;
+    let carbonReduction = powerGenerated * 0.01;
+    let treeCount = carbonReduction * 150;
 
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: url('img/top.png') no-repeat center center fixed;
-    background-size: cover;
-}
+    function updateStats() {
+        powerGenerated += 1;
+        carbonReduction = powerGenerated * 0.01;
+        treeCount = carbonReduction * 150;
 
-.main-header {
-    background-color: rgba(46, 125, 50, 0.8);
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
+        document.getElementById('powerGenerated').textContent = powerGenerated + ' kWh';
+        document.getElementById('carbonReduction').textContent = carbonReduction.toFixed(2) + ' トン CO2';
+        document.getElementById('treeCount').textContent = treeCount.toFixed(0) + ' 本';
+    }
 
-.clock {
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-}
+    setInterval(updateStats, 1000);
 
-.power-section {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1rem;
-    background-color: rgba(232, 245, 233, 0.8);
-    margin-top: -1rem;
-}
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
 
-.stat {
-    text-align: center;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 30%;
-}
+    setInterval(updateClock, 1000);
 
-h2 {
-    color: #2e7d32;
-    margin-bottom: 1rem;
-}
+    // グラフ描画用の関数
+    function drawChart(canvasId, data, label, color) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Array.from({length: data.length}, (_, i) => i + 1),
+                datasets: [{
+                    label: label,
+                    data: data,
+                    backgroundColor: color,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Time (seconds)', color: 'white' }, // X軸ラベルを白に
+                        ticks: { color: 'white' } // X軸メモリの色を白に
+                    },
+                    y: {
+                        title: { display: true, text: label, color: 'white' }, // Y軸ラベルを白に
+                        ticks: { color: 'white' } // Y軸メモリの色を白に
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    }
 
-h3 {
-    color: #2e7d32;
-}
+    // グラフを常に表示
+    const powerData = Array.from({length: 10}, (_, i) => powerGenerated + i);
+    drawChart('powerChart', powerData, 'Power Generated (kWh)', 'green');
 
-.hero {
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    position: relative;
-    top: -2cm;
-}
+    const carbonData = Array.from({length: 10}, (_, i) => (powerGenerated + i) * 0.01);
+    drawChart('carbonChart', carbonData, 'Carbon Reduction (Ton)', 'green');
 
-.hero-text {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 2rem;
-    border-radius: 10px;
-    z-index: 1;
-}
-
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 1.5cm;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 0;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #2e7d32;
-    color: white;
-    margin-top: 2rem;
-}
-
-/* グラフセクションのスタイル */
-#chartsSection {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: -10px 0 20px 0; /* グラフ全体を1センチ(約10px)上に移動 */
-    background-color: black;
-}
-
-.chart-container {
-    width: 20%;
-}
-
-canvas {
-    background-color: black;
-}
+    const treeData = Array.from({length: 10}, (_, i) => ((powerGenerated + i) * 0.01) * 150);
+    drawChart('treeChart', treeData, 'Number of Cedar Trees', 'green');
+});
