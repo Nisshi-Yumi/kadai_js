@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>発電フィットネスバイク</title>
+    <title>G-Ride </title>
     <link rel="stylesheet" href="style.css">
     <!-- Chart.jsのCDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,12 +12,13 @@
     <header class="main-header">
         <nav>
             <div class="logo">
-                <h1>G Ride　</h1>
+                <h1>G Ride</h1>
             </div>
         </nav>
         <div class="clock" id="clock"></div>
     </header>
 
+    <!-- カウントボタンはヘッダーの下に残す -->
     <section class="power-section">
         <div class="stat" id="powerStat">
             <h3>現在の発電量</h3>
@@ -33,30 +34,29 @@
         </div>
     </section>
 
-    <main>
-        <section class="hero">
-            <div class="hero-text">
-                <h2>Exercise for my future , and GOOD future for the Earth as well！</h2>
-                <p>自分のためが地球のために繋がる。フィットネスで発電し、脱炭素化に貢献する</p>
-            </div>
-        </section>
+    <!-- ①このセクション全体を2cm上に移動 -->
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Exercise for my future, and a GOOD future for the Earth as well！</h2>
+            <p>自分のためが地球のために繋がる。フィットネスで発電し、脱炭素化に貢献する</p>
+        </div>
+    </section>
 
-        <!-- グラフ表示用のキャンバスを3つ横並びで配置 -->
-        <section id="chartsSection" style="display:none; background-color: black; padding: 20px;">
-            <div class="chart-container">
-                <canvas id="powerChart"></canvas>
-                <h4 style="color: white; text-align: center;">目標: 500 kWh</h4>
-            </div>
-            <div class="chart-container">
-                <canvas id="carbonChart"></canvas>
-                <h4 style="color: white; text-align: center;">目標: 2 トン CO2</h4> <!-- 目標を2トンに変更 -->
-            </div>
-            <div class="chart-container">
-                <canvas id="treeChart"></canvas>
-                <h4 style="color: white; text-align: center;">目標: 200 本</h4> <!-- 目標を200本に変更 -->
-            </div>
-        </section>
-    </main>
+    <!-- ③3つのグラフを横並びで表示 -->
+    <section id="chartsSection" style="background-color: black; padding: 20px;">
+        <div class="chart-container">
+            <canvas id="powerChart"></canvas>
+            <h4 style="color: white; text-align: center;">目標: 500 kWh</h4>
+        </div>
+        <div class="chart-container">
+            <canvas id="carbonChart"></canvas>
+            <h4 style="color: white; text-align: center;">目標: 2 トン CO2</h4>
+        </div>
+        <div class="chart-container">
+            <canvas id="treeChart"></canvas>
+            <h4 style="color: white; text-align: center;">目標: 200 本</h4>
+        </div>
+    </section>
 
     <footer>
         <p>&copy; 2024 Team G-Ride</p>
