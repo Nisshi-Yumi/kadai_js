@@ -40,7 +40,11 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 30%;
-    cursor: pointer;
+}
+
+h2 {
+    color: #2e7d32;
+    margin-bottom: 1rem;
 }
 
 h3 {
@@ -55,6 +59,7 @@ h3 {
     color: white;
     text-align: center;
     position: relative;
+    top: -2cm;
 }
 
 .hero-text {
@@ -67,7 +72,7 @@ h3 {
 .hero::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: 1.5cm;
     left: 0;
     right: 0;
     bottom: 0;
@@ -83,13 +88,19 @@ footer {
     margin-top: 2rem;
 }
 
+/* グラフセクションのスタイル */
 #chartsSection {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 20px 0;
+    margin: -10px 0 20px 0; /* グラフ全体を1センチ(約10px)上に移動 */
+    background-color: black;
 }
 
 .chart-container {
-    width: 30%;
+    width: 20%;
+}
+
+canvas {
+    background-color: black;
 }
